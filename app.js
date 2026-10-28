@@ -1,0 +1,5 @@
+const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('#mobile-nav');
+if(toggle&&nav){toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.hidden=!open;});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.hidden=true;toggle.setAttribute('aria-expanded','false')}));}
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('entered');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));}
+const appointment=document.getElementById('appointment-form');
+if(appointment){const date=document.getElementById('date'),now=new Date();const local=new Date(now.getTime()-now.getTimezoneOffset()*60000);date.min=local.toISOString().slice(0,10);appointment.addEventListener('submit',event=>{event.preventDefault();document.getElementById('form-message').textContent='This is a preview. No appointment has been booked.';});}
